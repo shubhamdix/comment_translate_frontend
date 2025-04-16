@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Translator</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/google-translate-api-browser"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    
+    <!--<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .comment-box {
+            margin-bottom: 10px;
+        }
+
+        .comment {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .actions {
+            margin-top: 5px;
+        }
+    </style>-->
+</head>
+
+<body>
+    <div class="formContainer">
+        <div class="formWrapper">
+            <span class="logo">Comment Translator</span>
+    <div>
+        <input type="text" id="commentInput" placeholder="Write a comment...">
+        <button onclick="addComment()">Post</button>
+    </div>
+    <div id="commentsSection"></div>
+
+    <div id="google_translate_element"></div>
+    </div>
+    </div>
+    
+
+    <script>
+        /*function getCity() {
+            return new Promise((resolve, reject) => {
+                $.get("https://ipapi.co/json/", function (data) {
+                    resolve(data.city);
+                }).fail(() => reject("Unknown"));
+            });
+        }*/
+
+        function getCity() {
+                return fetch("https://translate-server-6.onrender.com/get-location")
+                    .then(response => response.json())
+                    .then(data => data.city)
+                    .catch(() => "Unknown");
+            }
+
+
+        async function addComment() {
+            let commentText = document.getElementById("commentInput").value;
+            if (/[^a-zA-Z0-9\s]/.test(commentText)) {
+                alert("Special characters are not allowed.");
+                return;
+            }
+
+            let city = await getCity();
+            let commentId = Date.now();
+            let commentHtml = `<div class="comment" id="${commentId}">
+                <strong>${city}</strong>: ${commentText}
+                <div class="actions">
+                    <button class="translate" onclick="translateComment('${commentId}')">Translate</button>
+                    <button class="like" onclick="likeComment('${commentId}')">Like (<span id="like-${commentId}">0</span>)</button>
+                    <button class="dislike" onclick="dislikeComment('${commentId}')">Dislike (<span id="dislike-${commentId}">0</span>)</button>
+                </div>
+            </div>`;
+            document.getElementById("commentsSection").innerHTML += commentHtml;
+            document.getElementById("commentInput").value = "";
+        }
+
+        function translateComment(id) {
+            let commentElem = document.getElementById(id);
+            let text = commentElem.childNodes[1].nodeValue;
+            /*googleTranslate.getText(text, "en").then(res => {
+                commentElem.childNodes[1].nodeValue = res.text;
+            });*/
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+
+        
+
+        function likeComment(id) {
+            let likeElem = document.getElementById(`like-${id}`);
+            likeElem.textContent = parseInt(likeElem.textContent) + 1;
+        }
+
+        function dislikeComment(id) {
+            let dislikeElem = document.getElementById(`dislike-${id}`);
+            let count = parseInt(dislikeElem.textContent) + 1;
+            dislikeElem.textContent = count;
+            if (count >= 2) document.getElementById(id).remove();
+        }
+    </script>
+</body>
+
+</html>
+
+
+    
+        
+    </div>
+</div>

@@ -1,0 +1,127 @@
+/*body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}*/
+
+.formContainer {
+    /*background-color: aqua;*/
+    background-image: url("/background1.png");
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formWrapper {
+    background-color: white;
+    height: 300px;
+    width: 500px;
+    padding: 50px 50px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    /*box-shadow: 5px 5px 5px black;*/
+    box-shadow: 0 10px 30px 2px black;
+    
+}
+
+.logo {
+    background-color:rgb(45, 46, 46) ;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 20px;
+    font-weight: bold;
+    font-size: 36px;
+    text-shadow: 5px 5px 5px black;
+    
+}
+
+input {
+    padding: 15px;
+    border: none;
+    width: 250px;
+    border-bottom: 2px solid rgb(52, 94, 209);
+    font-size: larger;
+
+    &::placeholder {
+        color: rgb(175, 175, 175);
+        font-size: large;
+    }
+}
+
+button {
+    background-color: rgb(52, 94, 209);
+    color: white;
+    padding: 15px 40px ;
+    font-weight: bold;
+    font-size: large;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(42, 71, 158);
+    color: white;
+}
+
+.translate {
+    background-color: rgb(95, 88, 88);
+    color: white;
+    
+}
+
+.translate:hover {
+    background-color: rgb(71, 66, 66);
+    color: white;
+}
+
+.like{
+    background-color:rgb(2, 138, 54) ;
+}
+.like:hover {
+    background-color: rgb(1, 97, 38);
+    color: white;
+}
+
+.dislike {
+    background-color: rgb(209, 40, 40);
+}
+
+.dislike:hover {
+    background-color: rgb(167, 26, 26);
+    color: white;
+}
+
+strong{
+    font-size: larger;
+}
+
+.comment{
+    font-size: larger;
+}
+
+.comment-box {
+    margin-bottom: 10px;
+}
+
+.comment {
+    background-color: rgb(199, 196, 196);
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.actions {
+    margin-top: 5px;
+}
+
+.google_translate_element {
+    padding: 500px;
+    width: 250px;  
+    font-size: larger;
+}
